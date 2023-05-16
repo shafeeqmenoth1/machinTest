@@ -16,7 +16,7 @@ function App() {
 
   return (
     <UserContextProvider>
-    <div className='flex h-screen items-center justify-center'>
+    <div className='flex bg-blue-100 h-screen items-center justify-center'>
         <Router/>
     </div>
     </UserContextProvider>

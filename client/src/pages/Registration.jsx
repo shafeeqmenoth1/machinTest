@@ -3,20 +3,23 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Form from '../components/Form';
+import ImagePicker from '../Icons/ImagePicker';
 import Login from './Login';
 
 
 function Registration() {
 const [isUser,setIsUser] = useState({})
+
   const [values,setValues] = useState({
     username: "",
-    img: "",
+    image: "",
     address:"",
     password: "",
     confirmPassword: "",
   })
     
-  const inputs = [
+
+  const LoginIputs = [
     {
       id:1,
       name:"username",
@@ -32,11 +35,12 @@ const [isUser,setIsUser] = useState({})
       name:"address",
       type:"text",
       placeholder: "Address",
+      errorMessage:"Address is required ",
       label : "Address",
-      errorMessage : "this field is required!",
+     
       required:true
-
     },
+  
     {
       id:3,
       name:"password",
@@ -59,29 +63,20 @@ const [isUser,setIsUser] = useState({})
       required:true
 
     },
-    {
-        id:5,
-        name:"image",
-        type:"file",
-        placeholder: "upload image",
-        errorMessage : "this field is required!",
-        label : "upload image",
-        required:true
-  
-      }
-  ]
 
+  ]
 
 const handleSubmit = async(e)=>{
   e.preventDefault()
+ 
   const data = new FormData(e.target)
-  
   const fnData = Object.fromEntries(data)
-  console.log(fnData);
-  const image = fnData.image.name
-  console.log(fnData.image.name);
 
-  const user = await axios.post("/api/auth/register",{...fnData,image})
+  const user = await axios.post("/api/auth/register",fnData,{
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+})
   setIsUser(user)
   setValues({})
 }
@@ -90,24 +85,26 @@ const onChange = (e)=>{
   setValues({...values,[e.target.name]:e.target.value})
 }   
 
-
-
   return (
  
-    
-     <form enctype="multipart/form-data" className='form flex flex-col w-1/3' onSubmit={handleSubmit}>
-      {inputs.map((input)=>(
+    <div className='flex flex-col bg-white shadow-md p-4 w-1/3'>
+      <h1 className='my-4 text-4xl text-gray-500 font-bold'>Register here</h1>
+     <form  enctype="multipart/form-data"  className=' flex flex-col' onSubmit={handleSubmit}>
+     {LoginIputs.map((input)=>(
 
         <Form key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
-      ))
-        
-      }
-  
-      <button className='bg-green-500 p-3'>Submit</button>
-      <Link className='bg-blue-200 p-2 mt-2' to='/login'>Login</Link>
-     </form>
-  
-
+        ))}
+        <label className='my-4 ml-4 border p-4 w-1/3' htmlFor="image">
+          <ImagePicker/>
+        <input type="file" name="image"  hidden id='image' onChange={onChange}/>
+        </label>
+          <button className='bg-green-500 p-3'>Submit</button>
+    
+      </form>
+     <div className='p-2 mt-2'>Already registered ? 
+    <Link  className='ml-2 text-blue-600' to='/login'>Login</Link>
+    </div>
+</div>
   );
 }
 

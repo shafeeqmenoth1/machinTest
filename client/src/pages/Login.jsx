@@ -55,9 +55,9 @@ function Login() {
 const handleSubmit = async(e)=>{
   e.preventDefault()
   const data = new FormData(e.target)
-  
+ 
   const fnData = Object.fromEntries(data)
-  
+
 
 
  const user =  await axios.post("/api/auth/login",{...fnData})
@@ -74,9 +74,10 @@ const onChange = (e)=>{
 
 
   return (
- 
+    <div className='flex flex-col bg-white shadow-md p-4 w-1/3'>
+    <h1 className='my-4 text-4xl text-gray-500 font-bold'>Login here</h1>
     
-     <form className='form flex flex-col w-1/3' onSubmit={handleSubmit}>
+     <form className='form flex flex-col' onSubmit={handleSubmit}>
       {LoginIputs.map((input)=>(
 
         <Form key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
@@ -85,9 +86,11 @@ const onChange = (e)=>{
       }
   
       <button className='bg-green-500 p-3'>Login</button>
-      <Link className='bg-blue-200 p-2 mt-2' to='/'>register</Link>
+      <div className='p-2 mt-2'>Not registered yet ? 
+    <Link  className='ml-2 text-blue-600' to='/'>Register</Link>
+    </div>
      </form>
-  
+  </div>
   
 
   );

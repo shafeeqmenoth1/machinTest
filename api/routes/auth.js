@@ -1,5 +1,5 @@
 import express from "express"
-import { login, logout, profile, register } from "../controllers/auth.js"
+import { login, profile, register } from "../controllers/auth.js"
 import fileUpload from "../utils/fileUpload.js"
 
 

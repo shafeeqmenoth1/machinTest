@@ -28,11 +28,13 @@ export const profile = async(req,res,next)=>{
 
 export const register = async(req,res,next)=>{
     try {
-        console.log(req.body);
+      const file = req.file.filename;
+  
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
         const newUser = new Users({
            ...req.body,
+             image:file,
             password:hash
         })
 

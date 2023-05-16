@@ -7,7 +7,7 @@ import {
    
   } from "react-router-dom";
 import Login from "./pages/Login";
-import Registration from "./pages/Registration";
+import Registration from "./pages/Registration.jsx";
 import Home from "./pages/Home";
 import AdminHome from "./pages/AdminHome";
 import { UserContext } from "./UserContext";

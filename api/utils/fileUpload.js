@@ -1,16 +1,17 @@
 import multer from "multer"
+import path from "path"
 
-
-import path from"path"
-
-multer
 const storage = multer.diskStorage({
+    
     destination:function(req,file,cb){
+        console.log("file Uploadlllled");
+        console.log();
         cb(null, "./public/uploads")
     },
     filename:function(req,file,cb){
+      
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.filename + '-' + uniqueSuffix)
+        cb(null, file.fieldname + '-' + uniqueSuffix)
     }
 })
 

@@ -33,7 +33,9 @@ const handleDelete=async(id)=>{
         users.map((user)=>
           
 (  <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-   <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{user.image}</td>
+   <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <img src={user.image} alt="" />
+   </td>
    <td className="px-6 py-4">{user.username}</td>
    <td className="px-6 py-4">{user.address}</td>
    <Link to={`${path}/${user._id}`} className='m-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded'>View</Link>

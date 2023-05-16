@@ -13,6 +13,7 @@ import cors from "cors"
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.static("public"))
+
 // MongoDb Database
 const connect = async ()=>{
     try {
