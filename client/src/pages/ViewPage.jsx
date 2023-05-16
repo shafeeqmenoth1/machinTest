@@ -14,10 +14,19 @@ function ViewPage() {
         })
     })
   return (
-    <div>
-        <li>{data.username}</li>
-        <li>{data.address}</li>
-        <li>{data.image}</li>
+    <div className='flex w-2/4 bg-white shadow-md rounded-md overflow-hidden'>
+      <div childre><img className='overflow-hidden' src={`http://localhost:5000/uploads/${data.image}`} alt="" /></div>
+      <div className='w-full'>
+        <div className='bg-gray-100 w-full p-3 text-center'>
+          <h2 className='text-3xl font-bold'>{data.username}</h2>
+        </div>
+        <div className='mt-2'>
+          <h2 className='font-bold'>Address: <span className='font-light'>{data.address}</span></h2>
+        </div>
+       
+      </div>
+       
+        
      
     </div>
   )

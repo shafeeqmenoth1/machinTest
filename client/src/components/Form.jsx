@@ -8,7 +8,7 @@ function Form({label,errorMessage,onChange,...others}) {
   }
   return (
    
-        <div className='form flex flex-col'>
+        <div className='form flex  flex-col'>
             <label >{label}</label>
             <input className='border p-2 my-2' {...others} onChange={onChange} onBlur={handlFocus}
              onFocus={()=>others.name === "confirmPassword" && setFocused(true)}
