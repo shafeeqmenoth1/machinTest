@@ -5,9 +5,10 @@ import Users from "../models/Users.js"
 
 
 export const updateUser = async(req,res,next)=>{
-    console.log(req.body);
+    const file = req.file.filename
+    console.log(file);
     try {
-        const updatedUser = await Users.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true})
+        const updatedUser = await Users.findByIdAndUpdate(req.params.id,{$set:{...req.body,image:file}},{new:true})
         res.status(200).json(updatedUser)
     } catch (error) {
         next(error)

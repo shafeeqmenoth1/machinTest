@@ -1,10 +1,11 @@
 import express from "express"
 import { updateUser,deleteUser,getUser,getAllUser } from "../controllers/user.js"
+import fileUpload from "../utils/fileUpload.js"
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js"
 const router = express.Router()
 
 //UPDATE
-router.put("/:id",verifyUser,updateUser)
+router.put("/:id",fileUpload.single("image"),verifyUser,updateUser)
 //DELETE
 router.delete("/:id",verifyUser,deleteUser)
 //GET

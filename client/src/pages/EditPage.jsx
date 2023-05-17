@@ -10,15 +10,14 @@ export default function EditPage() {
 
     const location = useLocation()
     const id = location.pathname.split("/")[4];
-  
+
     const [data,setData] = useState({})
     const [selectedImg,setSelectedImg] = useState("")
+    const [img,setImg] = useState("")
     const [values,setValues] = useState({
         username: "",
-        img: "",
-        address:"",
-        password: "",
-        confirmPassword: "",
+        image: "",
+        address:""
       })
 
       useEffect(()=>{
@@ -51,33 +50,29 @@ export default function EditPage() {
      
       ]
 
-      const handleSubmit = async(e)=>{
-        e.preventDefault()
-        const data = new FormData(e.target)
-  const fnData = Object.fromEntries(data)
-console.log(e);
-  const user = await axios.put(`/api/users/${id}`,fnData,{
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-})
-  setIsUser(user)
-  setValues("")
-      
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const data = new FormData(e.target)
+    data.append("image",img)
+    const fnData = Object.fromEntries(data)
+    console.log(fnData);
+    const user = await axios.put(`/api/users/${id}`, fnData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
-      
-      const onChange = (e)=>{
-        
-        setValues({...values,[e.target.name]:e.target.value})
-      }  
+    })
 
-      const handleCreateBase64 = useCallback(async (e) => { 
-        const file = e.target.files[0];
-        setValues({...values,[e.target.image]:e.target.image})
-        const base64 = await convertToBase64(file);
-        setSelectedImg(base64);
-        
-},[])
+  }
+      
+  
+
+  const handleCreateBase64 = useCallback(async (e) => {
+    const file = e.target.files[0];
+    setImg(file)
+    const base64 = await convertToBase64(file);
+    setSelectedImg(base64);
+
+  }, [])
 
 const convertToBase64 = (file) => {
 
@@ -110,17 +105,22 @@ const deleteImage =(e) => {
   setSelectedImg(null);
   
   };
+
+  const onChange = (e)=>{
+  
+setValues({...values,[e.target.name]:e.target.value})
+}  
   return (
     <div className='flex flex-col bg-white shadow-md p-4 w-2/3'>
       <h1 className='my-4 text-4xl text-gray-500 font-bold'>Edit Profile</h1>
           <form className='form ' onSubmit={handleSubmit}>
             <div className='flex  p-6 mb-3'>
-          <div className='w-1/3'>   
+          <div className='form w-1/3'>   
       {selectedImg ? (<><img src={selectedImg}/>  <button onClick={deleteImage} className='bg-red-500 text-white p-2'>
         <DeleteIcon/></button></>) :
         (<label className='my-4 ml-4  p-4' htmlFor="image">
           {data.image ? (<img className='w-50 h-50' src={`http://localhost:5000/uploads/${data.image}`} alt="img"/>) : <ImagePicker /> }
-        <input type="file" name="image"  hidden id='image' onChange={onChange}/>
+        <input type="file" name="image"  hidden id='image' onChange={handleCreateBase64}/>
         </label>)
 }
       </div>
