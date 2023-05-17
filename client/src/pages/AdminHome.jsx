@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 function AdminHome() {
   const [users,setUsers] = useState([])
  const path = "/api/users"
@@ -13,12 +12,20 @@ function AdminHome() {
       console.log(response.data);
     })
 },[users])
+const navigate = useNavigate()
+const handleLogout = ()=>{
+  axios.get('/api/auth/logout')
+
+  navigate("/")
+}
 
 const handleDelete=async(id)=>{
   await axios.delete(`/api/users/${id}`)
   setUsers(users.filter((item) => item._id !== id));
 }
   return (
+    <div className=''>
+      <button className='p-2 bg-green-500 rounded-md ' onClick={handleLogout}>Logout</button>
     <div className='relative overflow-x-auto'>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
   <thead className='text-xs text-gray-700 uppercase w-max bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
@@ -51,6 +58,7 @@ const handleDelete=async(id)=>{
 </table>
    
   
+ </div>
  </div>
   )
 }

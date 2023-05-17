@@ -68,12 +68,14 @@ const handleSubmit = async(e)=>{
 console.log(user);
 setUsername(user.data.details.username)
  setId(user.data.details._id)
- if(username&&isAdmin){
+ if(user.data.isAdmin){
   navigate("/admin")
 
-}else if(username&&!isAdmin){
+}else if(!user.data.isAdmin){
+
   navigate("/home")
 }
+
 }
 
 const onChange = (e)=>{

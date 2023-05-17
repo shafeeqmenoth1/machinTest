@@ -68,7 +68,7 @@ export const logout = async(req,res,next)=>{
     console.log("logout");
     try {
       
-        res.clearCookie('access_token',{path:'/'});
+        res.clearCookie('access_token',{domain: "localhost",path:'/'});
     } catch (error) {
         next(error)
     }
