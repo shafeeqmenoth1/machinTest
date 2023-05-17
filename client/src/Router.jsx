@@ -3,6 +3,7 @@
 import {
     createBrowserRouter,
     RouterProvider,
+    useNavigate,
   
    
   } from "react-router-dom";
@@ -19,22 +20,19 @@ import EditPage from "./pages/EditPage";
 
 function Router() {
 
-  const {username,id,isAdmin} = useContext(UserContext)
-
-
 
     const router = createBrowserRouter([
         {
-          path: "/",
+          path: "/register",
           element:    <Registration/>,
         },
         {
-          path: "/login",
-          element:    <Login/>,
+          path: "/",
+          element: <Login/>,
         },
         {
           path: "/home",
-          element:    <Home/>,
+          element:  <Home/>,
         },
         {
           path: "/admin",

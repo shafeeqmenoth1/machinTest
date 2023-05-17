@@ -9,7 +9,7 @@ export function UserContextProvider({children}){
     const [isAdmin,setIsAdmin] = useState(false)
     useEffect(()=>{
         axios.get('/api/auth/profile').then(response=>{
-             
+             console.log(response.data.isAdmin);
             setId(response.data.id)
             setIsAdmin(response.data.isAdmin)
         })

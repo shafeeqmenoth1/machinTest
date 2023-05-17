@@ -51,6 +51,10 @@ function Login() {
 
   ]
   const navigate = useNavigate()
+  const {username,id,isAdmin} = useContext(UserContext)
+
+
+
 
 const handleSubmit = async(e)=>{
   e.preventDefault()
@@ -64,7 +68,12 @@ const handleSubmit = async(e)=>{
 console.log(user);
 setUsername(user.data.details.username)
  setId(user.data.details._id)
- 
+ if(username&&isAdmin){
+  navigate("/admin")
+
+}else if(username&&!isAdmin){
+  navigate("/home")
+}
 }
 
 const onChange = (e)=>{

@@ -25,6 +25,7 @@ export const profile = async(req,res,next)=>{
     }
 }
 
+// REGISTER-------------------
 
 export const register = async(req,res,next)=>{
     try {
@@ -44,6 +45,8 @@ export const register = async(req,res,next)=>{
         next(error)
     }
 }
+
+// LOGIN-----------
 
 export const login = async(req,res,next)=>{
     try {

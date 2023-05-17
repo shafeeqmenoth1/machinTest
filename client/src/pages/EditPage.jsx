@@ -55,14 +55,14 @@ export default function EditPage() {
         e.preventDefault()
         const data = new FormData(e.target)
   const fnData = Object.fromEntries(data)
-
+console.log(e);
   const user = await axios.put(`/api/users/${id}`,fnData,{
     headers: {
       'Content-Type': 'multipart/form-data'
     }
 })
   setIsUser(user)
-  setValues({})
+  setValues("")
       
       }
       
@@ -73,6 +73,7 @@ export default function EditPage() {
 
       const handleCreateBase64 = useCallback(async (e) => { 
         const file = e.target.files[0];
+        setValues({...values,[e.target.image]:e.target.image})
         const base64 = await convertToBase64(file);
         setSelectedImg(base64);
         
@@ -106,7 +107,7 @@ const deleteImage =(e) => {
 
   e.preventDefault();
   
-  selectedImg(null);
+  setSelectedImg(null);
   
   };
   return (
@@ -119,7 +120,7 @@ const deleteImage =(e) => {
         <DeleteIcon/></button></>) :
         (<label className='my-4 ml-4  p-4' htmlFor="image">
           {data.image ? (<img className='w-50 h-50' src={`http://localhost:5000/uploads/${data.image}`} alt="img"/>) : <ImagePicker /> }
-        <input type="file" name="image"  hidden id='image' onChange={handleCreateBase64}/>
+        <input type="file" name="image"  hidden id='image' onChange={onChange}/>
         </label>)
 }
       </div>
