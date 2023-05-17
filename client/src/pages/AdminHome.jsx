@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+
 function AdminHome() {
   const [users,setUsers] = useState([])
  const path = "/api/users"
@@ -9,14 +10,13 @@ function AdminHome() {
   useEffect(()=>{
     axios.get('/api/users').then(response=>{
       setUsers(response.data)
-      console.log(response.data);
+    
     })
 },[users])
 const navigate = useNavigate()
 const handleLogout = ()=>{
   axios.get('/api/auth/logout')
-
-  navigate("/")
+    navigate("/")
 }
 
 const handleDelete=async(id)=>{
@@ -24,9 +24,12 @@ const handleDelete=async(id)=>{
   setUsers(users.filter((item) => item._id !== id));
 }
   return (
-    <div className=''>
-      <button className='p-2 bg-green-500 rounded-md ' onClick={handleLogout}>Logout</button>
-    <div className='relative overflow-x-auto'>
+    <div className='h-screen flex flex-col items-center justify-around	'>
+      <div>
+       <Link to={'/api/users/admin/addnew'} className='p-2 bg-blue-500 rounded-md mr-3 text-white'>Add new</Link>
+      <button className='p-2 bg-green-500 rounded-md text-white' onClick={handleLogout}>Logout</button>
+      </div>
+    <div className='relative overflow-x-auto '>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
   <thead className='text-xs text-gray-700 uppercase w-max bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
     <tr>

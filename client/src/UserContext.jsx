@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-
 export const UserContext = createContext({})
 
 export function UserContextProvider({children}){
@@ -9,7 +8,8 @@ export function UserContextProvider({children}){
     const [isAdmin,setIsAdmin] = useState(false)
     useEffect(()=>{
         axios.get('/api/auth/profile').then(response=>{
-             console.log(response.data.isAdmin);
+     
+           console.log(response.data);
             setId(response.data.id)
             setIsAdmin(response.data.isAdmin)
         })

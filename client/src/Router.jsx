@@ -15,6 +15,7 @@ import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import ViewPage from "./pages/ViewPage";
 import EditPage from "./pages/EditPage";
+import AddNewPage from "./pages/AddNewPage";
 
 
 
@@ -45,6 +46,10 @@ function Router() {
         {
           path: "/api/users/edit/:id",
           element:    <EditPage/>,
+        },
+        {
+          path: "/api/users/admin/addnew",
+          element:    <AddNewPage/>,
         },
       ])
 
