@@ -96,7 +96,7 @@ const onChange = (e)=>{
   
       <button className='bg-green-500 p-3'>Login</button>
       <div className='p-2 mt-2'>Not registered yet ? 
-    <Link  className='ml-2 text-blue-600' to='/'>Register</Link>
+    <Link  className='ml-2 text-blue-600' to='/register'>Register</Link>
     </div>
      </form>
   </div>

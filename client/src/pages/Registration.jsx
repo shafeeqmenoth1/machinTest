@@ -102,7 +102,7 @@ const onChange = (e)=>{
     
       </form>
      <div className='p-2 mt-2'>Already registered ? 
-    <Link  className='ml-2 text-blue-600' to='/login'>Login</Link>
+    <Link  className='ml-2 text-blue-600' to='/'>Login</Link>
     </div>
 </div>
   );
